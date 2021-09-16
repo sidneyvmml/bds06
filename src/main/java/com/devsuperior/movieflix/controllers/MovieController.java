@@ -21,50 +21,21 @@ public class MovieController {
 
 	@Autowired
 	private MovieService service;
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<MovieDetailsDTO> findById(@PathVariable Long id){
-		
+	public ResponseEntity<MovieDetailsDTO> findById(@PathVariable Long id) {
+
 		MovieDetailsDTO movieDTO = service.findById(id);
 		return ResponseEntity.ok(movieDTO);
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<Page<MovieCardDTO>> findById(
-			@RequestParam(value = "genreId", defaultValue = "0") Long genreId,
-			Pageable pageable){
-		
-		Page<MovieCardDTO> page = service.findByGenre(genreId, pageable );
-		return ResponseEntity.ok().body(page);
-		
-	}
-	
-	/*
-	 * @GetMapping public ResponseEntity<Page<MovieCardDTO>> findByGenre(
-	 * 
-	 * @RequestParam(value = "genreId", defaultValue = "0") Long genreId, Pageable
-	 * pageable ){
-	 * 
-	 * Page<MovieCardDTO> page = service.findByGenre(genreId, pageable); return
-	 * ResponseEntity.ok(page); }
-	 */
+			@RequestParam(value = "genreId", defaultValue = "0") Long genreId, Pageable pageable) {
 
-	/*
-	 *  public ResponseEntity<Page<MovieMinDTO>> findAll(Pageable
-	 * pageable) {
-	 * 
-	 * Page<MovieMinDTO> page = service.find(pageable);
-	 * 
-	 * return ResponseEntity.ok().body(page);
-	 * 
-	 * }
-	 * 
-	 * @PreAuthorize("hasAnyRole('MEMBER')")
-	 * 
-	 * @GetMapping(value = "/{id}") public ResponseEntity<MovieDTO>
-	 * findById(@PathVariable Long id){
-	 * 
-	 * MovieDTO dto = service.findById(id); return ResponseEntity.ok().body(dto); }
-	 */
+		Page<MovieCardDTO> page = service.findByGenre(genreId, pageable);
+		return ResponseEntity.ok().body(page);
+
+	}
 
 }
